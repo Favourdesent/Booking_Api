@@ -198,10 +198,10 @@
 							"script": {
 								"id": "32b31802-e47b-4cef-a62e-78fd37283312",
 								"exec": [
-									"if(pm.response.code === 200) {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.environment.set(\"bookingid\",  jsonData.bookingid);\r",
-									"}\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"booking Id\", function () {\r",
+									"    pm.environment.set(\"bookingid\",  jsonData.bookingid);  \r",
+									"}); \r",
 									"pm.test(\"Booking ID is present\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.bookingid).to.exist;\r",
@@ -217,6 +217,9 @@
 									"    \r",
 									"    pm.expect(jsonData.booking.bookingdates.checkin).to.eql(\"2024-05-18\");\r",
 									"    pm.expect(jsonData.booking.bookingdates.checkout).to.eql(\"2024-05-19\");\r",
+									"});\r",
+									"pm.test(\"Verify Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									""
 								],
