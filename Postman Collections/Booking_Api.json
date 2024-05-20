@@ -1,0 +1,761 @@
+{
+	"info": {
+		"_postman_id": "c9d33b40-ef30-4515-a62d-70f63d5b1480",
+		"name": "Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0ba61327-6ea4-4bda-93ab-9d53c9bdfc30",
+								"exec": [
+									"if(pm.response.code === 200) {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.environment.set(\"Auth\",  jsonData.token);\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code name has string 'OK'\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "2f31e5a4-12fd-4797-80af-5b326ab1e835",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/auth"
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "18285632-4aea-48ee-bb6d-eabd0f229208",
+								"exec": [
+									"  var jsonData = pm.response.json();\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code name has string 'bad request'\", function () {\r",
+									"    pm.response.to.have.status(\"bad request\");\r",
+									"});\r",
+									"pm.test(\"Verify that Error Message returns Bad credentials.\", function () {\r",
+									"    pm.expect(jsonData.reason).to.include(\"Bad credentials\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "0997e47f-567e-42bb-bd19-10f5e32d466e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"fav\",\r\n    \"password\" : \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/auth"
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4f3e6c78-cdc8-4608-a29e-0519b24e9a7d",
+								"exec": [
+									"  var jsonData = pm.response.json();\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code name has string 'bad request'\", function () {\r",
+									"    pm.response.to.have.status(\"bad request\");\r",
+									"});\r",
+									"pm.test(\"Verify that Error Message returns Bad credentials.\", function () {\r",
+									"    pm.expect(jsonData.reason).to.include(\"Bad credentials\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "f1b15d6c-673b-4219-b70a-e2bfc92c3c0a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123favou\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/auth"
+					},
+					"response": []
+				},
+				{
+					"name": "Empty string",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4f3e6c78-cdc8-4608-a29e-0519b24e9a7d",
+								"exec": [
+									"  var jsonData = pm.response.json();\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code name has string 'bad reques'\", function () {\r",
+									"    pm.response.to.have.status(\"bad request\");\r",
+									"});\r",
+									"pm.test(\"Verify that Error Message returns Bad credentials.\", function () {\r",
+									"    pm.expect(jsonData.reason).to.include(\"Bad credentials\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "9204626e-f869-4289-a811-e026f4609208",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"\",\r\n    \"password\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/auth"
+					},
+					"response": []
+				}
+			],
+			"id": "548c38bc-2b73-4e48-8e49-162c046b9021"
+		},
+		{
+			"name": "Create a booking",
+			"item": [
+				{
+					"name": "CreateBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "32b31802-e47b-4cef-a62e-78fd37283312",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"booking Id\", function () {\r",
+									"    pm.environment.set(\"bookingid\",  jsonData.bookingid);  \r",
+									"}); \r",
+									"pm.test(\"Booking ID is present\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bookingid).to.exist;\r",
+									"});\r",
+									"pm.test(\"Verify booking details\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(jsonData.booking.firstname).to.eql(\"favour\");\r",
+									"    pm.expect(jsonData.booking.lastname).to.eql(\"Elijah\");\r",
+									"    pm.expect(jsonData.booking.totalprice).to.eql(1000);\r",
+									"    pm.expect(jsonData.booking.depositpaid).to.be.true;\r",
+									"    pm.expect(jsonData.booking.additionalneeds).to.eql(\"Breakfast\");\r",
+									"    \r",
+									"    pm.expect(jsonData.booking.bookingdates.checkin).to.eql(\"2024-05-18\");\r",
+									"    pm.expect(jsonData.booking.bookingdates.checkout).to.eql(\"2024-05-19\");\r",
+									"});\r",
+									"pm.test(\"Verify Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "c86c062b-dc46-47db-95b0-5df33a0e90b0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Auth}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"favour\",\r\n    \"lastname\" : \"Elijah\",\r\n    \"totalprice\" : 1000,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2024-05-18\",\r\n        \"checkout\" : \"2024-05-19\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/booking"
+					},
+					"response": []
+				},
+				{
+					"name": "No Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "32b31802-e47b-4cef-a62e-78fd37283312",
+								"exec": [
+									"pm.test(\"Verify that Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code has string 'Unauthorized'\", function () {\r",
+									"    pm.response.to.have.status(\"Unauthorized\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "d81a78ae-4523-4b3b-a769-54c5d746ca14",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"favour\",\r\n    \"lastname\" : \"Elijah\",\r\n    \"totalprice\" : 1000,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2024-05-18\",\r\n        \"checkout\" : \"2024-05-19\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/booking"
+					},
+					"response": []
+				}
+			],
+			"id": "44b51b02-d642-4b00-8637-79ec93cdc403"
+		},
+		{
+			"name": "Get booking",
+			"item": [
+				{
+					"name": "GetBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78f3aa72-75c3-443f-9384-01729262fff3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code name has string 'OK'\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"pm.test(\"Verify booking details\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(jsonData.firstname).to.eql(\"favour\");\r",
+									"    pm.expect(jsonData.lastname).to.eql(\"Elijah\");\r",
+									"    pm.expect(jsonData.totalprice).to.eql(1000);\r",
+									"    pm.expect(jsonData.depositpaid).to.be.true;\r",
+									"    pm.expect(jsonData.additionalneeds).to.eql(\"Breakfast\");\r",
+									"    \r",
+									"    pm.expect(jsonData.bookingdates.checkin).to.eql(\"2024-05-18\");\r",
+									"    pm.expect(jsonData.bookingdates.checkout).to.eql(\"2024-05-19\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "7ff5342d-a12e-4189-8f7a-69f5faf21a14",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Auth}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "favour",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{bookingid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid booking Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78f3aa72-75c3-443f-9384-01729262fff3",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code name has string 'Not Found'\", function () {\r",
+									"    pm.response.to.have.status(\"Not Found\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "8e0bf655-37a0-4ee9-b28b-0325274e468c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Auth}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "favour",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "100000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "No Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78f3aa72-75c3-443f-9384-01729262fff3",
+								"exec": [
+									"pm.test(\"Verify that Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code has string 'Unauthorized'\", function () {\r",
+									"    pm.response.to.have.status(\"Unauthorized\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "09b865eb-3ccf-4c20-a825-3aa750c39acf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "favour",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{bookingid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "4f824123-6de4-4a40-aec9-b12bdf8ba9ae"
+		},
+		{
+			"name": "Update booking",
+			"item": [
+				{
+					"name": "PartialUpdateBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3d9a3ad-79fc-4739-b8c4-e204d7b8f30c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code name has string 'OK'\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"pm.test(\"Verify booking details\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(jsonData.firstname).to.eql(\"favour\");\r",
+									"    pm.expect(jsonData.lastname).to.eql(\"desent\");\r",
+									"    pm.expect(jsonData.totalprice).to.eql(50000);\r",
+									"    pm.expect(jsonData.depositpaid).to.be.true;\r",
+									"    pm.expect(jsonData.additionalneeds).to.eql(\"Dinner\");\r",
+									"    \r",
+									"    pm.expect(jsonData.bookingdates.checkin).to.eql(\"2024-05-20\");\r",
+									"    pm.expect(jsonData.bookingdates.checkout).to.eql(\"2024-06-01\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "788c9fe3-b5aa-4a8a-a23e-8629926aea49",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Auth}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2024-05-20\",\r\n        \"checkout\" : \"2024-06-01\"\r\n    },\r\n    \"additionalneeds\" : \"Dinner\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{bookingid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update booking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3d9a3ad-79fc-4739-b8c4-e204d7b8f30c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code name has string 'OK'\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"pm.test(\"Verify booking details\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(jsonData.firstname).to.eql(\"favour\");\r",
+									"    pm.expect(jsonData.lastname).to.eql(\"desent\");\r",
+									"    pm.expect(jsonData.totalprice).to.eql(50000);\r",
+									"    pm.expect(jsonData.depositpaid).to.be.true;\r",
+									"    pm.expect(jsonData.additionalneeds).to.eql(\"Breakfast\");\r",
+									"    \r",
+									"    pm.expect(jsonData.bookingdates.checkin).to.eql(\"2024-05-18\");\r",
+									"    pm.expect(jsonData.bookingdates.checkout).to.eql(\"2024-05-19\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "946ab860-a43a-425a-ab02-5fef64f8b311",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Auth}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"favour\",\r\n    \"lastname\" : \"desent\",\r\n    \"totalprice\" : 50000,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2024-05-18\",\r\n        \"checkout\" : \"2024-05-19\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{bookingid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Booking id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3d9a3ad-79fc-4739-b8c4-e204d7b8f30c",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code name has string 'Not Found'\", function () {\r",
+									"    pm.response.to.have.status(\"Not Found\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "3a96f0d3-4f90-491b-9a54-0ca566da5183",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Auth}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"favour\",\r\n    \"lastname\" : \"desent\",\r\n    \"totalprice\" : 50000,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2024-05-18\",\r\n        \"checkout\" : \"2024-05-19\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "12345678890"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "No Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3d9a3ad-79fc-4739-b8c4-e204d7b8f30c",
+								"exec": [
+									"pm.test(\"Verify that Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"pm.test(\"Verify that Status code has string 'Unauthorized'\", function () {\r",
+									"    pm.response.to.have.status(\"Unauthorized\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "8cbe13bb-9dd0-4936-9037-42fe1f524bc1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2024-05-20\",\r\n        \"checkout\" : \"2024-06-01\"\r\n    },\r\n    \"additionalneeds\" : \"Dinner\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{bookingid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "51928bfb-1026-4395-8f77-96e8cec28163"
+		}
+	]
+}
